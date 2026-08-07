@@ -28,3 +28,5 @@ tags: ["Speculative Decoding", "投机解码", "Medusa", "EAGLE", "N-gram", "Rej
 - **5.3 Self-Draft 方案**：Medusa、EAGLE-2/3、Draft Tree
 - **5.4 收益边界与限制**：接受率、精度风险、调度复杂度
 - **5.5 vLLM 投机解码实战**：配置方式与接受率实测
+
+> 📌 **学习提示**：本节内容以 vLLM v0.26.0（2026-07 发布）为基线撰写，投机解码统一通过 `--speculative-config` 配置（旧版 `--speculative-model` 等参数已废弃）。建议按 5.1 → 5.5 顺序阅读：5.1 的 Rejection Sampling 证明与加速比公式是理解一切的基础，5.5 是全章的实测与验收出口。
