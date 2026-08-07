@@ -6,14 +6,12 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import { unified } from '@astrojs/markdown-remark';
 
 export default defineConfig({
   site: 'https://caomaolufei.github.io',
   base: '/AIInfraGuide',
   integrations: [tailwind(), sitemap()],
-  experimental: {
-    contentLayer: true,
-  },
   markdown: {
     shikiConfig: {
       themes: {
@@ -23,12 +21,14 @@ export default defineConfig({
       defaultColor: 'light',
       wrap: false,
     },
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [
-      rehypeSlug,
-      [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-      [rehypeExternalLinks, { target: '_blank', rel: ['nofollow', 'noopener'] }],
-      rehypeKatex,
-    ],
+    processor: unified({
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [
+        rehypeSlug,
+        [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+        [rehypeExternalLinks, { target: '_blank', rel: ['nofollow', 'noopener'] }],
+        rehypeKatex,
+      ],
+    }),
   },
 });
