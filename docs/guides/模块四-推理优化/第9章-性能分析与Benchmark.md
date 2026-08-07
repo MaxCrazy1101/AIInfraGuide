@@ -30,3 +30,12 @@ tags: ["性能分析", "Benchmark", "vLLM Bench", "GenAI-Perf", "性能回归"]
 - **9.3 性能分析工具**：torch.profiler、Nsight Systems/Compute
 - **9.4 权威基准**：MLPerf Inference 与评测趋势
 - **9.5 性能回归门禁**：门禁规则、CI 集成、退化定位
+
+## 📝 学习提示
+
+- 本章是“验证层”：前面的优化（第 2-8 章）效果如何，用本章的指标与工具来量化。建议按 9.1 → 9.2 → 9.3 的顺序读（指标 → 测量 → 分析），9.4/9.5 可独立阅读。
+- 9.1 的 Goodput/SLO 与第 7 章 PD 分离闭环：分离架构的收益必须用 Goodput 验证。
+- 9.2 的可复现压测是 9.5 门禁的前置条件——没有可复现的压测，就没有性能回归检测。
+- 9.3 的 profiler 对比（good/bad）是 9.5 退化定位的第三招（git bisect 定位 commit，Nsight 对比定位根因）。
+- 9.4 的 MLPerf v6.0 负载清单（MoE/推理模型/VLM）就是平台能力建设清单，可对照第 5-8 章的技术逐项验证。
+- 本章命令与 API 基于 vLLM v0.26.0（vllm bench serve/latency/throughput 新 CLI），参数随版本变化，以官方文档为准。
