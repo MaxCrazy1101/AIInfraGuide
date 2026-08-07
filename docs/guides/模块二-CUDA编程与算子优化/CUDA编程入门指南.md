@@ -574,7 +574,7 @@ Reduce 是将一组数据聚合为一个值（如求和、求最大值）的操�
 
 **朴素实现**
 
-```cuda
+```cpp
 // 树形归约：步长从 blockDim/2 开始缩小，保证低编号线程连续工作
 __global__ void reduce_base(float* input, float* output, int n) {
     extern __shared__ float smem[];
@@ -604,7 +604,7 @@ __global__ void reduce_base(float* input, float* output, int n) {
 
 当 `step <= 32` 时，只有 1 个 Warp（32 线程）在工作。Warp 内线程天然 SIMT 锁步执行，不需要 `__syncthreads()`。直接展开这几轮循环可以省去多余的同步屏障开销：
 
-```cuda
+```cpp
 __device__ void warpReduce(volatile float* smem, int tid) {
     smem[tid] += smem[tid + 32];
     smem[tid] += smem[tid + 16];
@@ -621,7 +621,7 @@ __device__ void warpReduce(volatile float* smem, int tid) {
 
 在基础版本中，每个线程只加载 1 个元素。通过让每个线程在加载阶段就先做一次加法（负责 2 个元素），可以在不增加 Block 数量的前提下翻倍处理数据量，提升线程利用率：
 
-```cuda
+```cpp
 __global__ void reduce_opt(float* input, float* output, int n) {
     extern __shared__ float smem[];
     int tid = threadIdx.x;
