@@ -8,9 +8,14 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { unified } from '@astrojs/markdown-remark';
 
+// 部署目标切换：默认 GitHub Pages（/AIInfraGuide）；
+// Cloudflare Pages 上设置环境变量 ASTRO_BASE=/ 与 SITE_URL=https://aiinfraguide.pages.dev
+const site = process.env.SITE_URL ?? 'https://caomaolufei.github.io';
+const base = process.env.ASTRO_BASE ?? '/AIInfraGuide';
+
 export default defineConfig({
-  site: 'https://caomaolufei.github.io',
-  base: '/AIInfraGuide',
+  site,
+  base,
   integrations: [tailwind(), sitemap()],
   markdown: {
     shikiConfig: {
