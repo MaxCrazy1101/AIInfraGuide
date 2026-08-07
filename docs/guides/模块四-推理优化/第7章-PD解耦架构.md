@@ -31,3 +31,11 @@ Prefill 和 Decode 的计算特性截然不同（Compute Bound vs Memory Bound�
 - **7.4 Goodput 与 SLO 感知调度**：以有效吞吐为优化目标
 - **7.5 解耦架构的挑战与配比**：调度复杂度、P/D GPU 池配比
 - **7.6 vLLM Disaggregated Prefill 实战**：解耦部署与互扰量化
+
+## 📝 学习提示
+
+- 本章逻辑链：7.1 证明“有问题”（干扰）→ 7.2 给出方案（解耦）→ 7.3 解决工程命脉（KV 传输）→ 7.4 重定义目标（Goodput）→ 7.5 算清代价（配比）→ 7.6 完整验证。建议按序阅读。
+- 7.1 的干扰机制与 7.3 的传输账是本章的计算核心：口算 KV/token 体积和传输时间，量级感会帮你在选型时快速判断。
+- 7.4 的 Goodput 视角贯穿全章，读 7.2 的 DistServe 时请对照“goodput ≠ raw throughput”这条主线。
+- 7.6 的实战流程（基线→解耦→量化→配比）可直接作为你评估生产负载的模板。
+- 本节命令基于 vLLM v0.26.0（Disaggregated Prefill 为 experimental 特性），参数可能随版本变化，以官方文档为准。
